@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Container, Row, Card, ListGroup } from "react-bootstrap";
+import Control from "./components/Control";
+import TaskItem from "./components/TaskItem";
+import { useSelector, useDispatch } from "react-redux";
+import { setTasks } from "./redux/action/tasks";
+import axios from "axios";
 
 function App() {
+  const dispatch = useDispatch();
+  const { state } = useSelector((state) => state);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/db.json`).then(({ data }) => {
+      dispatch(setTasks(data.tasks));
+    });
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="block__center justify-content-md-center align-items-md-center">
+      <Row className="justify-content-md-center align-items-md-center">
+        <Card bg="light  " text="dark">
+          <Card.Body>
+            <Card.Title>To-Do:</Card.Title>
+            <Card.Text>Add you task at list</Card.Text>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+            {
+              state.tasks.map((task,index)=>{
+                return <TaskItem key={`${task}${index}`} task={task} id={index}/>
+              })
+            }
+          </ListGroup>
+          <Card.Body>
+            <Control />
+          </Card.Body>
+        </Card>
+      </Row>
+    </Container>
   );
 }
 
