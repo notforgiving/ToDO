@@ -3,14 +3,19 @@ export const setTasks = (tasks) => ({
   payload: tasks,
 });
 
-export const addTask = (task) => ({
-  type: "ADD__TASK",
-  payload: {
-    id: 3,
-    name: task,
-    done: false,
-  },
-});
+let id = 3
+
+export const addTask = (task) => {
+  id+=1
+  return {
+    type: "ADD__TASK",
+    payload: {
+      id: id,
+      name: task,
+      done: false,
+    },
+  }
+};
 
 export const doneTask = (id) => ({
   type: "TASK__DONE",
