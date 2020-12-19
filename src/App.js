@@ -17,8 +17,8 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Container className="block__center justify-content-md-center align-items-md-center">
-      <Row className="justify-content-md-center align-items-md-center">
+    <Container className="block__center align-items-md-center">
+      <Row className="align-items-md-center">
         <Card bg="light  " text="dark">
           <Card.Body>
             <Card.Title>To-Do:</Card.Title>
