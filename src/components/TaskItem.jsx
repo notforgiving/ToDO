@@ -2,22 +2,23 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { doneTask, removeTask } from "../redux/action/tasks";
+import PropTypes from 'prop-types';
 
-function TaskItem(props) {
+function TaskItem({task,id}) {
   const dispatch = useDispatch();
 
   const handleDoneTask = () => {
-    dispatch(doneTask(props.task.id));
+    dispatch(doneTask(task.id));
   };
 
   const handleRemoveTask = () => {
-    dispatch(removeTask(props.id));
+    dispatch(removeTask(id));
   };
 
   return (
     <Card>
       <Card.Body className="task__group">
-        <div className={props.task.done ? "done task__text" : "task__text"}>{props.task.name} </div>
+        <div className={task.done ? "done task__text" : "task__text"}>{task.name} </div>
         <div>
           <Button onClick={handleDoneTask} variant="success">
             V
@@ -30,5 +31,11 @@ function TaskItem(props) {
     </Card>
   );
 }
+
+TaskItem.propTypes = {
+  task: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+};
+
 
 export default TaskItem;

@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { addTask } from "../redux/action/tasks";
 import { useDispatch } from "react-redux";
 
+
 function Control(props) {
   const dispatch = useDispatch();
   const [newTask, setNewTask] = useState("");
